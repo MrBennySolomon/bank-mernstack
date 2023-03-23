@@ -1,0 +1,25 @@
+import express from 'express';
+import {getUsers,createUser,getUser,updateUser,deleteUser} from '../controllers/usersController.js';
+import User from '../models/User.js';
+
+import accountsRouter from './accountsRoutes.js';
+
+// Include other resource routers
+const router = express.Router();
+
+// Re-route into other resource routers
+router
+  .use('/:userId/accounts', accountsRouter);
+
+router
+  .route('/')
+  .get(getUsers)
+  .post(createUser);
+
+router
+  .route('/:id')
+  .get(getUser)
+  .put(updateUser)
+  .delete(deleteUser);
+
+export default router;

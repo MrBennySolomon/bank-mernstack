@@ -29,6 +29,7 @@
 /dist
 /dist-ssr
 .eslintcache
+desktop.ini
 
 # Configuration
 .prettierrc
