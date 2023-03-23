@@ -9,10 +9,11 @@ const AccountSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Please add credit']
   },
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User',
-    required: true
+  owner: {
+    name: {
+      type: String,
+    required: [true, 'Please account owner']
+    }
   }
 });
 

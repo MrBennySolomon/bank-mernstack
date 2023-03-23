@@ -1,3 +1,4 @@
+import colors from 'colors';
 import asyncHandler from '../middleware/asyncHandler.js';
 import User from '../models/User.js';
 
@@ -5,14 +6,17 @@ import User from '../models/User.js';
 // @route   GET /api/v1/users
 // @access  Public
 export const getUsers = asyncHandler(async (req, res, next) => { 
-  res.status(200).json(res.advancedResults);
+  const users = await User.find();
+  res.status(200).json({
+    success: true,
+    data: users,
+  });
 });
 
 // @desc    Create a User
 // @route   POST /api/v1/users
 // @access  Private
 export const createUser = asyncHandler(async (req, res, next) => {
-  console.log(req.body);
   const user = await User.create(req.body);
 
   res.status(200).json({
@@ -56,6 +60,84 @@ export const updateUser = asyncHandler(async (req, res, next) => {
   });
 });
 
+// @desc    Deposite money to User
+// @route   PUT /api/v1/users/deposite/:id/:cash
+// @access  Private
+export const depositeUser = asyncHandler(async (req, res, next) => {
+  const specificUser = await User.findById(req.params.id);
+
+  specificUser.cash = Number(specificUser.cash) + Number(req.params.cash);
+  const user = await User.findByIdAndUpdate(req.params.id, specificUser, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!user) {
+    return next(new Error(`User that end with '${req.params.id.slice(-6)}' not found`));
+  }
+
+  res.status(200).json({
+    success: true,
+    data: user,
+  });
+});
+
+// @desc    withdraw money from User
+// @route   PUT /api/v1/users/withdraw/:id/:cash
+// @access  Private
+export const withdrawUser = asyncHandler(async (req, res, next) => {
+  const specificUser = await User.findById(req.params.id);
+
+  specificUser.cash = Number(specificUser.cash) - Number(req.params.cash);
+  const user = await User.findByIdAndUpdate(req.params.id, specificUser, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!user) {
+    return next(new Error(`User that end with '${req.params.id.slice(-6)}' not found`));
+  }
+
+  res.status(200).json({
+    success: true,
+    data: user,
+  });
+});
+
+// @desc    Transfer money from User1 to User2
+// @route   PUT /api/v1/users/transfer/:id_from/:id_to/:cash
+// @access  Private
+// export const transferUser = asyncHandler(async (req, res, next) => {
+//   const userFrom = await User.findById(req.params.id_from);
+//   const userTo = await User.findById(req.params.id_to);
+
+//   userFrom.cash = Number(userFrom.cash) - Number(req.params.cash);
+//   userTo.cash = Number(userFrom.cash) + Number(req.params.cash);
+
+//   const updatedUserFrom = await User.findByIdAndUpdate(req.params.id, userFrom, {
+//     new: true,
+//     runValidators: true,
+//   });
+
+//   const updatedUserTo = await User.findByIdAndUpdate(req.params.id, userTo, {
+//     new: true,
+//     runValidators: true,
+//   });
+
+//   if (!userTo) {
+//     return next(new Error(`User that end with '${req.params.id.slice(-6)}' not found`));
+//   }
+
+//   if (!userFrom) {
+//     return next(new Error(`User that end with '${req.params.id.slice(-6)}' not found`));
+//   }
+
+//   res.status(200).json({
+//     success: true,
+//     data: {userTo, userFrom}
+//   });
+// });
+
 
 // @desc    Delete a user
 // @route   DELETE /api/v1/users/:id
@@ -74,7 +156,3 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
     data: {}
   });
 });
-
-
-
-
