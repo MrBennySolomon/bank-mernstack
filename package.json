@@ -1,0 +1,14 @@
+{
+  "name": "bank-mernstack",
+  "version": "1.0.0",
+  "description": "bank api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Benny Solomon",
+  "license": "MIT",
+  "dependencies": {
+    "vite": "^4.2.1"
+  }
+}
