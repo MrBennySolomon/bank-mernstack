@@ -2,8 +2,6 @@ import express from 'express';
 import {getUsers,createUser,getUser,updateUser,deleteUser,depositeUser,getOverdraftUsers,withdrawUser,transferUser} from '../controllers/usersController.js';
 import User from '../models/User.js';
 
-import accountsRouter from './accountsRoutes.js';
-
 // Include other resource routers
 const router = express.Router();
 
