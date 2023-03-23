@@ -6,7 +6,6 @@ import User from '../models/User.js';
 const router = express.Router();
 
 // Re-route into other resource routers
-router.use('/:userId/accounts', accountsRouter);
 router.route('/overdraft').get(getOverdraftUsers);
 router.route('/').get(getUsers).post(createUser);
 router.route('/:id').get(getUser).put(updateUser).delete(deleteUser);
