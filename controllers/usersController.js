@@ -107,36 +107,36 @@ export const withdrawUser = asyncHandler(async (req, res, next) => {
 // @desc    Transfer money from User1 to User2
 // @route   PUT /api/v1/users/transfer/:id_from/:id_to/:cash
 // @access  Private
-// export const transferUser = asyncHandler(async (req, res, next) => {
-//   const userFrom = await User.findById(req.params.id_from);
-//   const userTo = await User.findById(req.params.id_to);
+export const transferUser = asyncHandler(async (req, res, next) => {
+  const userFrom = await User.findById(req.params.id_from);
+  const userTo = await User.findById(req.params.id_to);
 
-//   userFrom.cash = Number(userFrom.cash) - Number(req.params.cash);
-//   userTo.cash = Number(userFrom.cash) + Number(req.params.cash);
+  userFrom.cash = Number(userFrom.cash) - Number(req.params.cash);
+  userTo.cash = Number(userTo.cash) + Number(req.params.cash);
 
-//   const updatedUserFrom = await User.findByIdAndUpdate(req.params.id, userFrom, {
-//     new: true,
-//     runValidators: true,
-//   });
+  const updatedUserFrom = await User.findByIdAndUpdate(req.params.id_from, userFrom, {
+    new: true,
+    runValidators: true,
+  });
 
-//   const updatedUserTo = await User.findByIdAndUpdate(req.params.id, userTo, {
-//     new: true,
-//     runValidators: true,
-//   });
+  const updatedUserTo = await User.findByIdAndUpdate(req.params.id_to, userTo, {
+    new: true,
+    runValidators: true,
+  });
 
-//   if (!userTo) {
-//     return next(new Error(`User that end with '${req.params.id.slice(-6)}' not found`));
-//   }
+  if (!userTo) {
+    return next(new Error(`User that end with '${req.params.id_to.slice(-6)}' not found`));
+  }
 
-//   if (!userFrom) {
-//     return next(new Error(`User that end with '${req.params.id.slice(-6)}' not found`));
-//   }
+  if (!userFrom) {
+    return next(new Error(`User that end with '${req.params.id_from.slice(-6)}' not found`));
+  }
 
-//   res.status(200).json({
-//     success: true,
-//     data: {userTo, userFrom}
-//   });
-// });
+  res.status(200).json({
+    success: true,
+    data: {userTo, userFrom}
+  });
+});
 
 
 // @desc    Delete a user
@@ -154,5 +154,21 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: {}
+  });
+});
+
+// @desc    Get all Users with overdraft
+// @route   GET /api/v1/users/overdraft
+// @access  Public
+export const getOverdraftUsers = asyncHandler(async (req, res, next) => { 
+  const users = await User.find();
+  console.log('users', users);
+  console.log('typeof users', typeof users);
+  const temp = 0;
+  const filteredUsers = users.filter((user) => Number(user.cash) <= temp);
+
+  res.status(200).json({
+    success: true,
+    data: filteredUsers,
   });
 });
