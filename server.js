@@ -5,8 +5,6 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import users from './routes/usersRoutes.js';
-import accounts from './routes/accountsRoutes.js';
-
 import errorHandler from './middleware/errorHandler.js';
 
 import connectDB from './config/db.js';
