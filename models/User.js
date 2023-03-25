@@ -7,14 +7,7 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       required: [true, "Please add a name"]
     },
-    cash: {
-      type: Number,
-      required: [true, "Please add cash"]
-    },
-    credit: {
-      type: Number,
-      required: [true, "Please add credit"]
-    }
+    accounts: [{}]
   },
   {
     toJSON: {
