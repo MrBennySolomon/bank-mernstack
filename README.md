@@ -1,6 +1,20 @@
+# [Bank MERN Stack](https://bank-api-client.netlify.app/)
+### Bank MERN Stack is a simple web application built using the MERN stack. The app allows users to create bank accounts, deposit and withdraw money, and transfer money to one another 
 
-## Prerequisites
-Make sure you have Node.js installed on your system.
+### front-end : vite react app
+### back-end  : node.js, Express, mongoDB, mongoose
+
+```dependencies
+"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"mongoose": "^7.0.2",
+		"morgan": "^1.10.0",
+		"nodemon": "^2.0.21",
+		"slugify": "^1.6.5"
+	}
+  ```
 
 #### MongoDB Atlas
 
@@ -32,6 +46,14 @@ npm run dev
 ```
 
 The server should now be running on `http://localhost:5000`.
+
+### live preview at: [https://bank-api-client.netlify.app/](https://bank-api-client.netlify.app/)
+
+### first diagram: 
+![project_diagram](https://user-images.githubusercontent.com/53153372/227730260-701fc983-a14d-4163-ba2c-8afa4234472f.png)
+
+### screen shots:
+![website-screenshot](https://user-images.githubusercontent.com/53153372/227730339-0b27afe4-c43a-4c4d-8903-b7fa51144292.png)
 
 ## License
 This project is licensed under the MIT License.
