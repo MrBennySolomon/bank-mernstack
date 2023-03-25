@@ -5,7 +5,6 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import users from './routes/usersRoutes.js';
-import accounts from './routes/accountsRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 
 import connectDB from './config/db.js';
@@ -18,6 +17,7 @@ const app = express();
 
 app.use(cors());
 
+// Body parser middleware
 app.use(express.json());
 
 if (process.env.NODE_ENV !== 'production') {
@@ -31,7 +31,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/users', users);
-app.use('/api/v1/accounts', accounts);
 
 app.use(errorHandler);
 
