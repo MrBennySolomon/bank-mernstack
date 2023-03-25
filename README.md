@@ -33,7 +33,7 @@ In order to run the project locally, you'll need to set some environment variabl
 ```env
 NODE_ENV=development
 PORT=5000
-MONGO_URI=<Your MongoDB URI>
+MONGO_URI=<Your MongoDB Connection String>
 ```
 
 Make sure to replace `<Your MongoDB URI>` with the actual URI for your MongoDB instance.
